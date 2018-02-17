@@ -57,6 +57,8 @@ public interface TemplateLoader {
    */
   TemplateSource sourceAt(final String location) throws IOException;
 
+  TemplateSource partialAt(final String location) throws IOException;
+
   /**
    * Resolve a relative location to an absolute location.
    *
@@ -75,6 +77,8 @@ public interface TemplateLoader {
    */
   String getSuffix();
 
+  String getPartialsPrefix();
+
   /**
    * Set the prefix that gets prepended to view names when building a URI.
    *
@@ -82,6 +86,8 @@ public interface TemplateLoader {
    *        URI.
    */
   void setPrefix(final String prefix);
+
+  void setPartialsPrefix(final String prefix);
 
   /**
    * Set the suffix that gets appended to view names when building a URI.

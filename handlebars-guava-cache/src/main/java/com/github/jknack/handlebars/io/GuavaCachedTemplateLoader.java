@@ -111,11 +111,21 @@ public class GuavaCachedTemplateLoader implements TemplateLoader {
     return delegate.getSuffix();
   }
 
+  @Override
+  public String getPartialsPrefix() {
+    return delegate.getPartialsPrefix();
+  }
+
   /**
    * {@inheritDoc}
    */
   public void setPrefix(final String prefix) {
     delegate.setPrefix(prefix);
+  }
+
+  @Override
+  public void setPartialsPrefix(String prefix) {
+    delegate.setPartialsPrefix(prefix);
   }
 
   /**

@@ -54,6 +54,16 @@ public class ServletContextTemplateLoader extends URLTemplateLoader {
     setSuffix(suffix);
   }
 
+  public ServletContextTemplateLoader(final ServletContext servletContext,
+                                      final String prefix,
+                                      final String partialsPrefix,
+                                      final String suffix) {
+    this.servletContext = notNull(servletContext, "The servlet context is required.");
+    setPrefix(prefix);
+    setPartialsPrefix(partialsPrefix);
+    setSuffix(suffix);
+  }
+
   /**
    * Creates a new {@link ServletContextTemplateLoader}.
    *

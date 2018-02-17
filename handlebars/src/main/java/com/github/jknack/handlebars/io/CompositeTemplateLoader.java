@@ -21,6 +21,7 @@ import static org.apache.commons.lang3.Validate.isTrue;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 import org.slf4j.Logger;
@@ -80,6 +81,19 @@ public class CompositeTemplateLoader implements TemplateLoader {
   }
 
   @Override
+  public TemplateSource partialAt(String location) throws IOException {
+    for (TemplateLoader delegate : delegates) {
+      try {
+        return delegate.partialAt(location);
+      } catch (IOException ex) {
+        // try next loader in the chain.
+        logger.trace("Unable to resolve: {}, trying next loader in the chain.", location);
+      }
+    }
+    throw new FileNotFoundException(location);
+  }
+
+  @Override
   public String resolve(final String location) {
     for (TemplateLoader delegate : delegates) {
       try {
@@ -120,5 +134,15 @@ public class CompositeTemplateLoader implements TemplateLoader {
    */
   public Iterable<TemplateLoader> getDelegates() {
     return Arrays.asList(delegates);
+  }
+
+  @Override
+  public String getPartialsPrefix() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public void setPartialsPrefix(String prefix) {
+    throw new UnsupportedOperationException();
   }
 }

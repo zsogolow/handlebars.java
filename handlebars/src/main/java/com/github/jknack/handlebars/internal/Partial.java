@@ -132,7 +132,7 @@ class Partial extends HelperResolver {
         LinkedList<TemplateSource> invocationStack = context.data(Context.INVOCATION_STACK);
 
         try {
-          TemplateSource source = loader.sourceAt(path);
+          TemplateSource source = loader.partialAt(path);
 
           if (exists(invocationStack, source.filename())) {
             TemplateSource caller = invocationStack.removeLast();

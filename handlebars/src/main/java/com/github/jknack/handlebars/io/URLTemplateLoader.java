@@ -72,6 +72,17 @@ public abstract class URLTemplateLoader extends AbstractTemplateLoader {
     return new URLTemplateSource(location, resource);
   }
 
+  @Override
+  public TemplateSource partialAt(String uri) throws IOException {
+    notEmpty(uri, "The uri is required.");
+    String location = resolvePartial(normalize(uri));
+    URL resource = getResource(location);
+    if (resource == null) {
+      throw new FileNotFoundException(location);
+    }
+    return new URLTemplateSource(location, resource);
+  }
+
   /**
    * Get a template resource for the given location.
    *

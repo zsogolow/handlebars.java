@@ -17,6 +17,8 @@
  */
 package com.github.jknack.handlebars.io;
 
+import java.io.IOException;
+
 import static org.apache.commons.lang3.StringUtils.defaultString;
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -45,6 +47,11 @@ public abstract class AbstractTemplateLoader implements TemplateLoader {
   private String prefix = DEFAULT_PREFIX;
 
   /**
+   * The prefix that gets prepended to partial views names when building a URI.
+   */
+  private String partialsPrefix = prefix;
+
+  /**
    * The suffix that gets appended to view names when building a URI.
    */
   private String suffix = DEFAULT_SUFFIX;
@@ -58,6 +65,10 @@ public abstract class AbstractTemplateLoader implements TemplateLoader {
   @Override
   public String resolve(final String uri) {
     return prefix + normalize(uri) + suffix;
+  }
+
+  public String resolvePartial(final String uri) {
+    return partialsPrefix + normalize(uri) + suffix;
   }
 
   /**
@@ -86,6 +97,14 @@ public abstract class AbstractTemplateLoader implements TemplateLoader {
     }
   }
 
+  @Override
+  public void setPartialsPrefix(String prefix) {
+    this.partialsPrefix = notNull(prefix, "A partials prefix is required.");
+    if (!this.partialsPrefix.endsWith("/")) {
+      this.partialsPrefix += "/";
+    }
+  }
+
   /**
    * Set the suffix that gets appended to view names when building a URI.
    *
@@ -104,6 +123,11 @@ public abstract class AbstractTemplateLoader implements TemplateLoader {
     return prefix;
   }
 
+  @Override
+  public String getPartialsPrefix() {
+    return partialsPrefix;
+  }
+
   /**
    * @return The suffix that gets appended to view names when building a
    *         URI.
@@ -111,5 +135,10 @@ public abstract class AbstractTemplateLoader implements TemplateLoader {
   @Override
   public String getSuffix() {
     return suffix;
+  }
+
+  @Override
+  public TemplateSource partialAt(String location) throws IOException {
+    return null;
   }
 }
