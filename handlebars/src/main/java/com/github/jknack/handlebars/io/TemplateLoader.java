@@ -57,6 +57,13 @@ public interface TemplateLoader {
    */
   TemplateSource sourceAt(final String location) throws IOException;
 
+  /**
+   * Get a template source from location.
+   *
+   * @param location The location of the template source. Required.
+   * @return A new template source.
+   * @throws IOException If the template's source can't be resolved.
+   */
   TemplateSource partialAt(final String location) throws IOException;
 
   /**
@@ -66,6 +73,14 @@ public interface TemplateLoader {
    * @return Resolve the uri to an absolute location.
    */
   String resolve(final String location);
+
+  /**
+   * Resolve a relative location to an absolute location.
+   *
+   * @param location The candidate location.
+   * @return Resolve the uri to an absolute location.
+   */
+  String resolvePartial(final String location);
 
   /**
    * @return The prefix that gets prepended to view names when building a URI.

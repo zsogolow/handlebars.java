@@ -90,11 +90,33 @@ public class GuavaCachedTemplateLoader implements TemplateLoader {
     }
   }
 
+  @Override
+  public TemplateSource partialAt(final String location) throws IOException {
+    try {
+      return cache.get(location, new Callable<TemplateSource>() {
+        @Override
+        public TemplateSource call() throws Exception {
+          return delegate.partialAt(location);
+        }
+      });
+    } catch (ExecutionException e) {
+      Throwables.propagateIfPossible(e.getCause(), IOException.class);
+      throw Throwables.propagate(e.getCause());
+    }
+  }
+
   /**
    * {@inheritDoc}
    */
   public String resolve(final String location) {
     return delegate.resolve(location);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public String resolvePartial(final String location) {
+    return delegate.resolvePartial(location);
   }
 
   /**

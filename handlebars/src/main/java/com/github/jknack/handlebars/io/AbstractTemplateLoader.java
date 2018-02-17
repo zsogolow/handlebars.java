@@ -136,9 +136,4 @@ public abstract class AbstractTemplateLoader implements TemplateLoader {
   public String getSuffix() {
     return suffix;
   }
-
-  @Override
-  public TemplateSource partialAt(String location) throws IOException {
-    return null;
-  }
 }

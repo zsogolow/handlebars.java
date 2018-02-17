@@ -54,6 +54,18 @@ public class SpecResourceLocator extends URLTemplateLoader {
   }
 
   @Override
+  public TemplateSource partialAt(String uri) throws IOException {
+    notNull(uri, "The uri is required.");
+    notEmpty(uri.toString(), "The uri is required.");
+    String location = resolvePartial(normalize(uri));
+    String text = templates.get(uri.toString());
+    if (text == null) {
+      throw new FileNotFoundException(location);
+    }
+    return new StringTemplateSource(location, text);
+  }
+
+  @Override
   protected URL getResource(final String location) throws IOException {
     throw new UnsupportedOperationException();
   }

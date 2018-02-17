@@ -33,6 +33,20 @@ import java.net.URL;
  */
 public class FileTemplateLoader extends URLTemplateLoader {
 
+  public FileTemplateLoader(final File basedir, final File basePartialsDir, final String suffix) {
+    notNull(basedir, "The base dir is required.");
+    isTrue(basedir.exists(), "File not found: %s", basedir);
+    isTrue(basedir.isDirectory(), "A directory is required: %s",
+            basedir);
+    notNull(basePartialsDir, "The base dir is required.");
+    isTrue(basePartialsDir.exists(), "File not found: %s", basedir);
+    isTrue(basePartialsDir.isDirectory(), "A directory is required: %s",
+            basePartialsDir);
+    setPrefix(basedir.toString());
+    setPartialsPrefix(basePartialsDir.toString());
+    setSuffix(suffix);
+  }
+
   /**
    * Creates a new {@link FileTemplateLoader}.
    *
@@ -40,12 +54,7 @@ public class FileTemplateLoader extends URLTemplateLoader {
    * @param suffix The view suffix. Required.
    */
   public FileTemplateLoader(final File basedir, final String suffix) {
-    notNull(basedir, "The base dir is required.");
-    isTrue(basedir.exists(), "File not found: %s", basedir);
-    isTrue(basedir.isDirectory(), "A directory is required: %s",
-        basedir);
-    setPrefix(basedir.toString());
-    setSuffix(suffix);
+   this(basedir, basedir, suffix);
   }
 
   /**

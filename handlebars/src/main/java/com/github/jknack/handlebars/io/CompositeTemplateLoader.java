@@ -108,6 +108,20 @@ public class CompositeTemplateLoader implements TemplateLoader {
   }
 
   @Override
+  public String resolvePartial(final String location) {
+    for (TemplateLoader delegate : delegates) {
+      try {
+        delegate.sourceAt(location);
+        return delegate.resolve(location);
+      } catch (IOException ex) {
+        // try next loader in the chain.
+        logger.trace("Unable to resolve: {}, trying next loader in the chain.", location);
+      }
+    }
+    throw new IllegalStateException("Can't resolve: '" + location + "'");
+  }
+
+  @Override
   public String getPrefix() {
     throw new UnsupportedOperationException();
   }

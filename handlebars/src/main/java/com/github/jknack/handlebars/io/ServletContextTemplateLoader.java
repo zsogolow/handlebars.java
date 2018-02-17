@@ -38,6 +38,16 @@ public class ServletContextTemplateLoader extends URLTemplateLoader {
    */
   private final ServletContext servletContext;
 
+  public ServletContextTemplateLoader(final ServletContext servletContext,
+                                      final String prefix,
+                                      final String partialsPrefix,
+                                      final String suffix) {
+    this.servletContext = notNull(servletContext, "The servlet context is required.");
+    setPrefix(prefix);
+    setPartialsPrefix(partialsPrefix);
+    setSuffix(suffix);
+  }
+
   /**
    * Creates a new {@link ServletContextTemplateLoader}.
    *
@@ -49,19 +59,7 @@ public class ServletContextTemplateLoader extends URLTemplateLoader {
    */
   public ServletContextTemplateLoader(final ServletContext servletContext,
       final String prefix, final String suffix) {
-    this.servletContext = notNull(servletContext, "The servlet context is required.");
-    setPrefix(prefix);
-    setSuffix(suffix);
-  }
-
-  public ServletContextTemplateLoader(final ServletContext servletContext,
-                                      final String prefix,
-                                      final String partialsPrefix,
-                                      final String suffix) {
-    this.servletContext = notNull(servletContext, "The servlet context is required.");
-    setPrefix(prefix);
-    setPartialsPrefix(partialsPrefix);
-    setSuffix(suffix);
+    this(servletContext, prefix, prefix, suffix);
   }
 
   /**

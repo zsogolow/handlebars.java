@@ -60,6 +60,16 @@ public class MapTemplateLoader extends URLTemplateLoader {
   }
 
   @Override
+  public TemplateSource partialAt(final String uri) throws FileNotFoundException {
+    String location = resolvePartial(normalize(uri));
+    String text = map.get(location);
+    if (text == null) {
+      throw new FileNotFoundException(location);
+    }
+    return new StringTemplateSource(location, text);
+  }
+
+  @Override
   protected URL getResource(final String location) {
     throw new UnsupportedOperationException();
   }

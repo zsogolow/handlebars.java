@@ -30,6 +30,14 @@ import java.net.URL;
  */
 public class ClassPathTemplateLoader extends URLTemplateLoader {
 
+  public ClassPathTemplateLoader(final String prefix,
+                                 final String partialsPrefix,
+                                 final String suffix) {
+    setPrefix(prefix);
+    setPartialsPrefix(partialsPrefix);
+    setSuffix(suffix);
+  }
+
   /**
    * Creates a new {@link ClassPathTemplateLoader}.
    *
@@ -37,8 +45,7 @@ public class ClassPathTemplateLoader extends URLTemplateLoader {
    * @param suffix The view suffix. Required.
    */
   public ClassPathTemplateLoader(final String prefix, final String suffix) {
-    setPrefix(prefix);
-    setSuffix(suffix);
+    this(prefix, prefix, suffix);
   }
 
   /**
