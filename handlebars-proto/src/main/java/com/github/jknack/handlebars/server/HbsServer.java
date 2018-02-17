@@ -156,7 +156,6 @@ public class HbsServer {
     logger.info("Welcome to the Handlebars.java server v" + version);
 
     URLTemplateLoader loader = new FileTemplateLoader(args.dir);
-    loader.setPartialsPrefix(args.dir + "/partials");
     loader.setPrefix(new File(args.dir, args.prefix).getAbsolutePath());
     loader.setSuffix(args.suffix);
     Handlebars handlebars = new Handlebars(loader);
