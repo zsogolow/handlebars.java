@@ -38,6 +38,17 @@ public class ServletContextTemplateLoader extends URLTemplateLoader {
    */
   private final ServletContext servletContext;
 
+    /**
+     * Creates a new {@link ServletContextTemplateLoader}.
+     *
+     * @param servletContext The servlet context. Required.
+     * @param prefix The prefix that gets prepended to view names when building a
+     *        URI.
+     * @param partialsPrefix The prefix that gets prepended to view names when building a
+     *        URI for partial views.
+     * @param suffix The suffix that gets appended to view names when building a
+     *        URI. Required.
+     */
   public ServletContextTemplateLoader(final ServletContext servletContext,
                                       final String prefix,
                                       final String partialsPrefix,

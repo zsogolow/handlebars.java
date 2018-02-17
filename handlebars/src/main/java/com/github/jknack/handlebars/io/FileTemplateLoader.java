@@ -33,6 +33,13 @@ import java.net.URL;
  */
 public class FileTemplateLoader extends URLTemplateLoader {
 
+  /**
+   * Creates a new {@link FileTemplateLoader}.
+   *
+   * @param basedir The base directory. Required.
+   * @param basePartialsDir The base directory to look for partials. Required.
+   * @param suffix The view suffix. Required.
+   */
   public FileTemplateLoader(final File basedir, final File basePartialsDir, final String suffix) {
     notNull(basedir, "The base dir is required.");
     isTrue(basedir.exists(), "File not found: %s", basedir);

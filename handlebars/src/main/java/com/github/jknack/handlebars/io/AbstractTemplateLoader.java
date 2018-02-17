@@ -67,6 +67,12 @@ public abstract class AbstractTemplateLoader implements TemplateLoader {
     return prefix + normalize(uri) + suffix;
   }
 
+  /**
+   * Resolve the uri to an absolute location for partials.
+   *
+   * @param uri The candidate uri.
+   * @return Resolve the uri to an absolute location.
+   */
   public String resolvePartial(final String uri) {
     return partialsPrefix + normalize(uri) + suffix;
   }
@@ -97,6 +103,13 @@ public abstract class AbstractTemplateLoader implements TemplateLoader {
     }
   }
 
+  /**
+   * Set the prefix that gets prepended to view names when building a URI
+   * for partials.
+   *
+   * @param prefix The prefix that gets prepended to view names when building a
+   *        URI for partials.
+   */
   @Override
   public void setPartialsPrefix(String prefix) {
     this.partialsPrefix = notNull(prefix, "A partials prefix is required.");
@@ -123,6 +136,10 @@ public abstract class AbstractTemplateLoader implements TemplateLoader {
     return prefix;
   }
 
+  /**
+   * @return The prefix that gets prepended to view names when building a URI
+   * for a partial.
+   */
   @Override
   public String getPartialsPrefix() {
     return partialsPrefix;

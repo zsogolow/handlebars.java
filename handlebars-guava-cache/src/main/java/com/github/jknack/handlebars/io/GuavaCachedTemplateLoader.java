@@ -90,6 +90,9 @@ public class GuavaCachedTemplateLoader implements TemplateLoader {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public TemplateSource partialAt(final String location) throws IOException {
     try {
@@ -133,6 +136,9 @@ public class GuavaCachedTemplateLoader implements TemplateLoader {
     return delegate.getSuffix();
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public String getPartialsPrefix() {
     return delegate.getPartialsPrefix();
@@ -145,6 +151,9 @@ public class GuavaCachedTemplateLoader implements TemplateLoader {
     delegate.setPrefix(prefix);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void setPartialsPrefix(String prefix) {
     delegate.setPartialsPrefix(prefix);
